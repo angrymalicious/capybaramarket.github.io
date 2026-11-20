@@ -127,19 +127,26 @@ footer { padding: 60px 20px; text-align: center; background-color: var(--bg-card
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
 .modal-overlay.active { display: flex; }
 .modal-content { background-color: var(--bg-card); border-radius: 12px; width: 100%; max-width: 700px; max-height: 90vh; display: flex; flex-direction: column; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); overflow: hidden; }
-.modal-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-main); }
+.modal-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-main); flex-shrink: 0; /* Шапка не сжимается */ }
 .modal-header h3 { font-family: var(--font-heading); font-size: 22px; margin: 0; font-weight: 600; }
 .modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-muted); }
-.modal-body { padding: 0; overflow-y: auto; flex-grow: 1; background-color: #fff; max-height: calc(90vh - 80px); }
-.modal-body iframe { width: 100%; height: 100%; min-height: 750px; border: none; display: block; }
+
+/* Контейнер, который будет прокручиваться */
+.modal-body { padding: 0; overflow-y: auto; flex-grow: 1; background-color: #fff; }
+
+/* Делаем iframe очень высоким, чтобы форма помещалась целиком */
+.modal-body iframe { width: 100%; height: 900px; border: none; display: block; }
 
 /* --- АДАПТИВНОСТЬ --- */
 @media (max-width: 900px) {
     .product-page { grid-template-columns: 1fr; gap: 40px; margin: 30px auto; }
     .hero h1 { font-size: 40px; }
     .modal-content { height: 95vh; max-height: 95vh; }
-    .modal-body iframe { min-height: 100%; }
+    
+    /* На телефонах делаем iframe еще выше для запаса */
+    .modal-body iframe { height: 1000px; }
 }
+
 @media (max-width: 768px) {
     .thumbnail-list {
         grid-template-columns: repeat(3, 1fr); /* На телефонах 3 в ряд */
