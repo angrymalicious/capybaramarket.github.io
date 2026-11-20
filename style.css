@@ -138,3 +138,70 @@ footer { padding: 40px 24px; text-align: center; font-family: var(--font-mono); 
     .grid { margin: 0 12px 40px; } nav { padding: 16px 12px; }
     .product-info h1 { font-size: 32px; }
 }
+
+/* --- МОДАЛЬНОЕ ОКНО --- */
+.modal-overlay {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--canvas);
+    border: 1px solid var(--ink);
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bone);
+}
+
+.modal-header h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    font-family: sans-serif;
+    line-height: 1;
+}
+
+.modal-body {
+    padding: 0;
+    overflow: hidden;
+    flex-grow: 1;
+    background-color: #fff;
+}
+
+.modal-body iframe {
+    width: 100%;
+    height: 600px; /* Высота формы внутри окна */
+    border: none;
+    display: block;
+}
