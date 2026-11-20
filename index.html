@@ -14,7 +14,7 @@
     <nav class="border-bottom">
         <div class="nav-links"><a href="#catalog">Каталог</a></div>
         <div class="logo">Capybara</div>
-        <div class="nav-links"><a href="#order">Заказать</a></div>
+        <div class="nav-links"><a href="#order-form">Заказать</a></div>
     </nav>
 
     <section class="hero">
@@ -33,7 +33,8 @@
             <div class="card-title-row"><h3 class="card-title">Лавандовый вечер</h3><span class="price-tag">800 ₽</span></div>
             <p class="card-desc">Нежный аромат лаванды и бергамота. Время горения: 40 часов.</p>
             <a href="product-1.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
-            <a href="https://forms.yandex.ru/u/ВАШ_ID?prefill_product=Свеча%20Лавандовый%20вечер" class="btn-shop" target="_blank">Заказать</a>
+            <!-- Ссылка с предзаполнением названия и ID -->
+            <a href="https://forms.yandex.ru/u/6affc43928697bf2845447a7/?answer_short_text_9008994401604016=Свеча+Лавандовый+вечер&answer_short_text_9008994404244940=candle-01" class="btn-shop" target="_blank">Заказать</a>
         </div>
         <!-- Товар 2 -->
         <div class="card">
@@ -41,7 +42,7 @@
             <div class="card-title-row"><h3 class="card-title">Тепло корицы</h3><span class="price-tag">850 ₽</span></div>
             <p class="card-desc">Согревающий аромат корицы, яблока и ванили. Идеально для прохладных вечеров.</p>
             <a href="product-2.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
-            <a href="https://forms.yandex.ru/u/ВАШ_ID?prefill_product=Свеча%20Тепло%20корицы" class="btn-shop" target="_blank">Заказать</a>
+            <a href="https://forms.yandex.ru/u/6affc43928697bf2845447a7/?answer_short_text_9008994401604016=Свеча+Тепло+корицы&answer_short_text_9008994404244940=candle-02" class="btn-shop" target="_blank">Заказать</a>
         </div>
         <!-- Товар 3 -->
         <div class="card">
@@ -49,9 +50,21 @@
             <div class="card-title-row"><h3 class="card-title">Зимний лес</h3><span class="price-tag">900 ₽</span></div>
             <p class="card-desc">Свежий аромат хвои, кедра и эвкалипта. Создает атмосферу загородного дома.</p>
             <a href="product-3.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
-            <a href="https://forms.yandex.ru/u/ВАШ_ID?prefill_product=Свеча%20Зимний%20лес" class="btn-shop" target="_blank">Заказать</a>
+            <a href="https://forms.yandex.ru/u/6affc43928697bf2845447a7/?answer_short_text_9008994401604016=Свеча+Зимний+лес&answer_short_text_9008994404244940=candle-03" class="btn-shop" target="_blank">Заказать</a>
         </div>
     </div>
+
+    <!-- Блок с формой (iframe) для общего заказа -->
+    <section class="order-section" id="order-form" style="padding: 40px 24px; border-top: 1px solid var(--ink); background-color: var(--canvas);">
+        <div class="order-container" style="max-width: 800px; margin: 0 auto; border: 1px solid var(--ink); background: var(--bone); padding: 24px;">
+            <h3 style="font-family: var(--font-display); font-size: 32px; text-transform: uppercase; text-align: center; margin-bottom: 12px;">Оформить заказ</h3>
+            <p style="text-align: center; margin-bottom: 24px; font-size: 14px;">Заполните форму, и я свяжусь с вами для подтверждения деталей и оплаты через СБП.</p>
+            <div class="yandex-form-wrapper">
+                <!-- Встроенная форма. Параметр ?iframe=1 обязателен -->
+                <iframe src="https://forms.yandex.ru/u/6affc43928697bf2845447a7/?iframe=1" frameborder="0" name="ya-form-6affc43928697bf2845447a7" width="100%" style="min-height: 800px; border: 1px solid var(--ink); background: #fff;"></iframe>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <p>© 2024 Capybara Market. Свечи ручной работы.</p>
