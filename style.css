@@ -207,3 +207,13 @@ footer { padding: 40px 24px; text-align: center; font-family: var(--font-mono); 
     border: none;
     display: block;
 }
+
+@media (max-width: 768px) {
+    .modal-content {
+        max-height: 95vh;
+        height: 95vh;
+    }
+    .modal-body iframe {
+        min-height: 100%;
+    }
+}
