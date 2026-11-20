@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свеча "Апельсин" Пряный глинтвейн | Capybara Market</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">Capybara</a>
+        <div class="nav-links">
+            <a href="index.html">← В каталог</a>
+        </div>
+    </header>
+
+    <main class="product-page">
+        <div class="product-gallery">
+            <!-- Главное фото (00.jpg) -->
+            <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-4/00.jpg" alt="Апельсин Пряный глинтвейн" class="main-image" id="mainImage">
+            
+            <!-- Миниатюры (00.jpg - 05.jpg) -->
+            <div class="thumbnail-list">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-4/00.jpg" onclick="changeImage(this)" class="active" alt="Фото 1">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-4/01.jpg" onclick="changeImage(this)" alt="Фото 2">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-4/02.jpg" onclick="changeImage(this)" alt="Фото 3">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-4/03.jpg" onclick="changeImage(this)" alt="Фото 4">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-4/04.jpg" onclick="changeImage(this)" alt="Фото 5">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-4/05.jpg" onclick="changeImage(this)" alt="Фото 6">
+            </div>
+        </div>
+
+        <div class="product-info">
+            <h1>Свеча "Апельсин" Пряный глинтвейн</h1>
+            <div class="price">400 ₽</div>
+            
+            <div class="description">
+                <p>Ароматическая свеча «Апельсин» — результат тщательной ручной работы мастера. Свеча наполнена ароматом Пряный Глинтвейн. Аромат создает атмосферу уюта и гармонии. Гипсовый стакан, раскрашенный вручную, станет самодостаточной деталью интерьера. Свеча долго горит, наполняя пространство мягким светом и согревающим запахом. Эта вещь идеально дополнит праздничный стол, станет стильным элементом декора или оригинальным подарком. Универсальный дизайн и натуральные компоненты делают её подходящей для любого помещения.</p>
+                <p>Свеча будет отличным подарком для друзей, коллег, родных, знакомых. К каждой свече прилагается предсказание на новый год, которое приятно будет открыть прямо в новогоднюю ночь!</p>
+                <ul>
+                    <li>Время горения: около 8 часов</li>
+                    <li>Объем: 30 мл</li>
+                    <li>Вес: 350 г</li>
+                    <li>Подсвечник: гипсовый</li>
+                </ul>
+            </div>
+
+            <button onclick="openOrderModal('Свеча Апельсин Пряный глинтвейн', 'product-4')" class="btn-primary">Заказать</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 Capybara Market. Сделано с любовью.</p>
+        <div class="social-links">
+            <a href="https://t.me/ваш_ник">Telegram</a>
+            <a href="https://vk.com/ваш_профиль">ВКонтакте</a>
+            <a href="https://max.ru/ваш_профиль">MAX</a>
+        </div>
+    </footer>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Оформление заказа</h3>
+                <button class="modal-close" onclick="closeOrderModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <iframe id="yandexFormIframe" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Смена главного фото
+        function changeImage(element) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = element.src;
+            
+            document.querySelectorAll('.thumbnail-list img').forEach(img => img.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Модальное окно
+        function openOrderModal(productName, productId) {
+            const modal = document.getElementById('orderModal');
+            const title = document.getElementById('modalTitle');
+            const iframe = document.getElementById('yandexFormIframe');
+
+            title.textContent = 'Вы заказываете: ' + productName;
+
+            const baseUrl = "https://forms.yandex.ru/u/6affc43928697bf2845447a7/?iframe=1";
+            const nameParam = "&answer_short_text_9008994401604016=" + encodeURIComponent(productName);
+            const idParam = "&answer_short_text_9008994404244940=" + encodeURIComponent(productId);
+
+            iframe.src = baseUrl + nameParam + idParam;
+            modal.classList.add('active');
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('orderModal');
+            const iframe = document.getElementById('yandexFormIframe');
+            iframe.src = ""; 
+            modal.classList.remove('active');
+        }
+
+        document.getElementById('orderModal').addEventListener('click', function(e) {
+            if (e.target === this) closeOrderModal();
+        });
+    </script>
+</body>
+</html>
