@@ -26,42 +26,49 @@
         </div>
     </section>
 
-    <!-- ФИЛЬТРЫ -->
     <div class="category-filters" id="catalog">
-        <button class="filter-btn active" onclick="filterProducts('all')">Все товары</button>
-        <button class="filter-btn" onclick="filterProducts('candles')">Свечи</button>
-        <button class="filter-btn" onclick="filterProducts('toys')">Елочные игрушки</button>
+        <button class="filter-btn active" onclick="filterProducts('all', event)">Все товары</button>
+        <button class="filter-btn" onclick="filterProducts('candles', event)">Свечи</button>
+        <button class="filter-btn" onclick="filterProducts('toys', event)">Елочные игрушки</button>
     </div>
 
-    <!-- СЕТКА ТОВАРОВ -->
     <div class="container">
         <div class="product-grid" id="productGrid">
             
-            <!-- Товар 1 (Свеча) -->
+            <!-- Товар 1 -->
             <div class="product-card" data-category="candles" onclick="window.location.href='product-1.html'">
                 <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Лавандовый вечер">
+                    <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-1/00.jpg" alt="Барашек Барбарисовый леденец">
                 </div>
-                <h3 class="product-title">Свеча "Лавандовый вечер"</h3>
-                <p class="product-price">800 ₽</p>
+                <h3 class="product-title">Свеча "Барашек" Барбарисовый леденец</h3>
+                <p class="product-price">1 200 ₽</p>
             </div>
 
-            <!-- Товар 2 (Свеча) -->
+            <!-- Товар 2 -->
             <div class="product-card" data-category="candles" onclick="window.location.href='product-2.html'">
                 <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1575844264831-4b8920b431a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Тепло корицы">
+                    <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-2/00.jpg" alt="Барашек Пряный глинтвейн">
                 </div>
-                <h3 class="product-title">Свеча "Тепло корицы"</h3>
-                <p class="product-price">850 ₽</p>
+                <h3 class="product-title">Свеча "Барашек" Пряный глинтвейн</h3>
+                <p class="product-price">1 200 ₽</p>
             </div>
 
-            <!-- Товар 3 (Игрушка) -->
-            <div class="product-card" data-category="toys" onclick="window.location.href='product-3.html'">
+            <!-- Товар 3 -->
+            <div class="product-card" data-category="candles" onclick="window.location.href='product-3.html'">
                 <div class="product-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Елочный шар">
+                    <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-3/00.jpg" alt="Спил дерева Хвойный лес">
                 </div>
-                <h3 class="product-title">Елочный шар "Зимняя сказка"</h3>
-                <p class="product-price">1 200 ₽</p>
+                <h3 class="product-title">Свеча "Спил дерева" Хвойный лес</h3>
+                <p class="product-price">1 100 ₽</p>
+            </div>
+
+            <!-- Товар 4 -->
+            <div class="product-card" data-category="candles" onclick="window.location.href='product-4.html'">
+                <div class="product-image-wrapper">
+                    <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-4/00.jpg" alt="Апельсин Пряный глинтвейн">
+                </div>
+                <h3 class="product-title">Свеча "Апельсин" Пряный глинтвейн</h3>
+                <p class="product-price">1 150 ₽</p>
             </div>
 
         </div>
@@ -76,7 +83,7 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО (Код без изменений) -->
+    <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -89,15 +96,12 @@
         </div>
     </div>
 
-    <!-- СКРИПТЫ -->
     <script>
-        // Логика фильтрации
-        function filterProducts(category) {
-            // Меняем активную кнопку
+        // Фильтрация (немного поправил передачу event)
+        function filterProducts(category, event) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Фильтруем карточки
             const cards = document.querySelectorAll('.product-card');
             cards.forEach(card => {
                 if (category === 'all' || card.dataset.category === category) {
@@ -108,7 +112,7 @@
             });
         }
 
-        // Логика модального окна (осталась прежней)
+        // Модальное окно
         function openOrderModal(productName, productId) {
             const modal = document.getElementById('orderModal');
             const title = document.getElementById('modalTitle');
