@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Лавандовый вечер | Capybara Market</title>
+    <title>Свеча "Барашек" Барбарисовый леденец | Capybara Market</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
@@ -19,33 +19,37 @@
     </header>
 
     <main class="product-page">
-        <!-- Галерея -->
         <div class="product-gallery">
-            <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Лавандовый вечер" class="main-image" id="mainImage">
+            <!-- Главное фото (00.jpg) -->
+            <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-1/00.jpg" alt="Барашек Барбарисовый леденец" class="main-image" id="mainImage">
+            
+            <!-- Миниатюры (00.jpg - 05.jpg) -->
             <div class="thumbnail-list">
-                <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" onclick="changeImage(this)" class="active">
-                <img src="https://images.unsplash.com/photo-1602874801006-3a1ce9e7d2b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" onclick="changeImage(this)">
-                <img src="https://images.unsplash.com/photo-1575844264831-4b8920b431a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" onclick="changeImage(this)">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-1/00.jpg" onclick="changeImage(this)" class="active" alt="Фото 1">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-1/01.jpg" onclick="changeImage(this)" alt="Фото 2">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-1/02.jpg" onclick="changeImage(this)" alt="Фото 3">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-1/03.jpg" onclick="changeImage(this)" alt="Фото 4">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-1/04.jpg" onclick="changeImage(this)" alt="Фото 5">
+                <img src="https://disk.yandex.ru/d/nc4iJHT0gAjBhg/product-1/05.jpg" onclick="changeImage(this)" alt="Фото 6">
             </div>
         </div>
 
-        <!-- Информация -->
         <div class="product-info">
-            <h1>Свеча "Лавандовый вечер"</h1>
-            <div class="price">800 ₽</div>
+            <h1>Свеча "Барашек" Барбарисовый леденец</h1>
+            <div class="price">1 200 ₽</div>
             
             <div class="description">
-                <p>Погрузитесь в атмосферу спокойствия с этой свечой. Натуральный соевый воск, фитиль из хлопка и композиция эфирных масел лаванды и бергамота создают мягкий, успокаивающий аромат.</p>
+                <p>Свеча "Барашек" с предсказанием на 2027 год - это не просто источник приятного аромата, но и милый сувенир, который создаст уютную атмосферу в вашем доме. Свеча изготовлена вручную и наполнена натуральным соевым воском с ароматом "Барбарисовый леденец". Барашек - это символ наступающего нового 2027 года по восточному календарю.</p>
+                <p>Свеча будет отличным подарком для друзей, коллег, родных, знакомых. К каждой свече прилагается предсказание на новый год, которое приятно будет открыть прямо в новогоднюю ночь!</p>
                 <ul>
-                    <li>Время горения: около 40 часов</li>
-                    <li>Объем: 200 мл</li>
+                    <li>Время горения: около 8 часов</li>
+                    <li>Объем: 30 мл</li>
                     <li>Вес: 350 г</li>
-                    <li>Упаковка: крафтовая коробка</li>
+                    <li>Подсвечник: гипсовый</li>
                 </ul>
-                <p>Идеально для вечернего чтения, медитации или просто для того, чтобы наполнить дом уютом.</p>
             </div>
 
-            <button onclick="openOrderModal('Свеча Лавандовый вечер', 'candle-01')" class="btn-primary">Заказать</button>
+            <button onclick="openOrderModal('Свеча Барашек Барбарисовый леденец', 'product-1')" class="btn-primary">Заказать</button>
         </div>
     </main>
 
@@ -75,10 +79,8 @@
         // Смена главного фото
         function changeImage(element) {
             const mainImage = document.getElementById('mainImage');
-            // Берем src миниатюры и меняем размер на большой
-            mainImage.src = element.src.replace('w=150', 'w=800'); 
+            mainImage.src = element.src;
             
-            // Переключаем класс active
             document.querySelectorAll('.thumbnail-list img').forEach(img => img.classList.remove('active'));
             element.classList.add('active');
         }
