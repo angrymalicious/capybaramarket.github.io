@@ -6,33 +6,51 @@
     <title>Лавандовый вечер | Capybara Market</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500&family=Oswald:wght@500&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="border-bottom">
-        <div class="nav-links"><a href="index.html">← Назад в каталог</a></div>
-        <div class="logo">Capybara</div>
-        <div class="nav-links"><a href="#order">Заказать</a></div>
-    </nav>
+    <header>
+        <a href="index.html" class="logo">Capybara</a>
+        <div class="nav-links">
+            <a href="index.html">← В каталог</a>
+        </div>
+    </header>
 
-    <section class="product-page" id="order">
-        <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Свеча Лавандовый вечер">
+    <main class="product-page">
+        <!-- Галерея -->
+        <div class="product-gallery">
+            <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Лавандовый вечер" class="main-image" id="mainImage">
+            <div class="thumbnail-list">
+                <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" onclick="changeImage(this)" class="active">
+                <img src="https://images.unsplash.com/photo-1602874801006-3a1ce9e7d2b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" onclick="changeImage(this)">
+                <img src="https://images.unsplash.com/photo-1575844264831-4b8920b431a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" onclick="changeImage(this)">
+            </div>
         </div>
+
+        <!-- Информация -->
         <div class="product-info">
-            <h1>Лавандовый вечер</h1>
-            <div class="price-tag">800 ₽</div>
-            <p class="description">
-                Погрузитесь в атмосферу спокойствия с этой свечой. Натуральный соевый воск, фитиль из хлопка и композиция эфирных масел лаванды и бергамота создают мягкий, успокаивающий аромат. Идеально для вечернего чтения или медитации. Время горения — около 40 часов.
-            </p>
-            <a href="https://forms.yandex.ru/u/6affc43928697bf2845447a7/?answer_short_text_9008994401604016=Свеча+Лавандовый+вечер&answer_short_text_9008994404244940=candle-01" class="btn-shop" target="_blank">Заказать</a>
+            <h1>Свеча "Лавандовый вечер"</h1>
+            <div class="price">800 ₽</div>
+            
+            <div class="description">
+                <p>Погрузитесь в атмосферу спокойствия с этой свечой. Натуральный соевый воск, фитиль из хлопка и композиция эфирных масел лаванды и бергамота создают мягкий, успокаивающий аромат.</p>
+                <ul>
+                    <li>Время горения: около 40 часов</li>
+                    <li>Объем: 200 мл</li>
+                    <li>Вес: 350 г</li>
+                    <li>Упаковка: крафтовая коробка</li>
+                </ul>
+                <p>Идеально для вечернего чтения, медитации или просто для того, чтобы наполнить дом уютом.</p>
+            </div>
+
+            <button onclick="openOrderModal('Свеча Лавандовый вечер', 'candle-01')" class="btn-primary">Заказать</button>
         </div>
-    </section>
+    </main>
 
     <footer>
-        <p>© 2024 Capybara Market. Свечи ручной работы.</p>
+        <p>© 2024 Capybara Market. Сделано с любовью.</p>
         <div class="social-links">
             <a href="https://t.me/ваш_ник">Telegram</a>
             <a href="https://vk.com/ваш_профиль">ВКонтакте</a>
@@ -40,10 +58,57 @@
         </div>
     </footer>
 
-    <div class="promo-banner" id="promo">
-        <span>Скидка 10% на первый заказ по промокоду CAPYBARA</span>
-        <span class="close-btn" onclick="document.getElementById('promo').style.display='none'">×</span>
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Оформление заказа</h3>
+                <button class="modal-close" onclick="closeOrderModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <iframe id="yandexFormIframe" src="" frameborder="0"></iframe>
+            </div>
+        </div>
     </div>
 
+    <script>
+        // Смена главного фото
+        function changeImage(element) {
+            const mainImage = document.getElementById('mainImage');
+            // Берем src миниатюры и меняем размер на большой
+            mainImage.src = element.src.replace('w=150', 'w=800'); 
+            
+            // Переключаем класс active
+            document.querySelectorAll('.thumbnail-list img').forEach(img => img.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Модальное окно
+        function openOrderModal(productName, productId) {
+            const modal = document.getElementById('orderModal');
+            const title = document.getElementById('modalTitle');
+            const iframe = document.getElementById('yandexFormIframe');
+
+            title.textContent = 'Вы заказываете: ' + productName;
+
+            const baseUrl = "https://forms.yandex.ru/u/6affc43928697bf2845447a7/?iframe=1";
+            const nameParam = "&answer_short_text_9008994401604016=" + encodeURIComponent(productName);
+            const idParam = "&answer_short_text_9008994404244940=" + encodeURIComponent(productId);
+
+            iframe.src = baseUrl + nameParam + idParam;
+            modal.classList.add('active');
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('orderModal');
+            const iframe = document.getElementById('yandexFormIframe');
+            iframe.src = ""; 
+            modal.classList.remove('active');
+        }
+
+        document.getElementById('orderModal').addEventListener('click', function(e) {
+            if (e.target === this) closeOrderModal();
+        });
+    </script>
 </body>
 </html>
