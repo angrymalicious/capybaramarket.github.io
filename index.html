@@ -3,59 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capybara Market | Свечи ручной работы</title>
+    <title>Capybara Market | Уютные вещи</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500&family=Oswald:wght@500&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="border-bottom">
-        <div class="nav-links"><a href="#catalog">Каталог</a></div>
-        <div class="logo">Capybara</div>
-        <div class="nav-links"><a href="#" onclick="openOrderModal('Выберите товар в каталоге', '')">Заказать</a></div>
-    </nav>
+    <header>
+        <a href="index.html" class="logo">Capybara</a>
+        <div class="nav-links">
+            <a href="#catalog">Каталог</a>
+            <a href="#contacts">Контакты</a>
+        </div>
+    </header>
 
     <section class="hero">
-        <div class="hero-text">
-            <h1>Ароматы в каждой детали</h1>
-            <p>Крафтовые свечи из натурального соевого воска. Ручная работа и уникальные ароматы для вашего дома.</p>
+        <div class="hero-content">
+            <h1>Ароматы и уют в каждой детали</h1>
+            <p>Крафтовые свечи, елочные игрушки и декор ручной работы. Создаем атмосферу, в которую хочется возвращаться.</p>
         </div>
-        <div class="hero-image"></div>
     </section>
 
-    <div class="catalog-header" id="catalog"><h2>Каталог</h2></div>
-    <div class="grid">
-        <!-- Товар 1 -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Лаванда" class="card-img">
-            <div class="card-title-row"><h3 class="card-title">Лавандовый вечер</h3><span class="price-tag">800 ₽</span></div>
-            <p class="card-desc">Нежный аромат лаванды и бергамота. Время горения: 40 часов.</p>
-            <a href="product-1.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
-            <!-- Вызов модального окна через JS -->
-            <button onclick="openOrderModal('Свеча Лавандовый вечер', 'candle-01')" class="btn-shop">Заказать</button>
-        </div>
-        <!-- Товар 2 -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1575844264831-4b8920b431a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Корица" class="card-img">
-            <div class="card-title-row"><h3 class="card-title">Тепло корицы</h3><span class="price-tag">850 ₽</span></div>
-            <p class="card-desc">Согревающий аромат корицы, яблока и ванили. Идеально для прохладных вечеров.</p>
-            <a href="product-2.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
-            <button onclick="openOrderModal('Свеча Тепло корицы', 'candle-02')" class="btn-shop">Заказать</button>
-        </div>
-        <!-- Товар 3 -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1602874801006-3a1ce9e7d2b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Хвоя" class="card-img">
-            <div class="card-title-row"><h3 class="card-title">Зимний лес</h3><span class="price-tag">900 ₽</span></div>
-            <p class="card-desc">Свежий аромат хвои, кедра и эвкалипта. Создает атмосферу загородного дома.</p>
-            <a href="product-3.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
-            <button onclick="openOrderModal('Свеча Зимний лес', 'candle-03')" class="btn-shop">Заказать</button>
+    <!-- ФИЛЬТРЫ -->
+    <div class="category-filters" id="catalog">
+        <button class="filter-btn active" onclick="filterProducts('all')">Все товары</button>
+        <button class="filter-btn" onclick="filterProducts('candles')">Свечи</button>
+        <button class="filter-btn" onclick="filterProducts('toys')">Елочные игрушки</button>
+    </div>
+
+    <!-- СЕТКА ТОВАРОВ -->
+    <div class="container">
+        <div class="product-grid" id="productGrid">
+            
+            <!-- Товар 1 (Свеча) -->
+            <div class="product-card" data-category="candles" onclick="window.location.href='product-1.html'">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Лавандовый вечер">
+                </div>
+                <h3 class="product-title">Свеча "Лавандовый вечер"</h3>
+                <p class="product-price">800 ₽</p>
+            </div>
+
+            <!-- Товар 2 (Свеча) -->
+            <div class="product-card" data-category="candles" onclick="window.location.href='product-2.html'">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1575844264831-4b8920b431a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Тепло корицы">
+                </div>
+                <h3 class="product-title">Свеча "Тепло корицы"</h3>
+                <p class="product-price">850 ₽</p>
+            </div>
+
+            <!-- Товар 3 (Игрушка) -->
+            <div class="product-card" data-category="toys" onclick="window.location.href='product-3.html'">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Елочный шар">
+                </div>
+                <h3 class="product-title">Елочный шар "Зимняя сказка"</h3>
+                <p class="product-price">1 200 ₽</p>
+            </div>
+
         </div>
     </div>
 
-    <footer>
-        <p>© 2024 Capybara Market. Свечи ручной работы.</p>
+    <footer id="contacts">
+        <p>© 2024 Capybara Market. Сделано с любовью.</p>
         <div class="social-links">
             <a href="https://t.me/ваш_ник">Telegram</a>
             <a href="https://vk.com/ваш_профиль">ВКонтакте</a>
@@ -63,12 +76,7 @@
         </div>
     </footer>
 
-    <div class="promo-banner" id="promo">
-        <span>Скидка 10% на первый заказ по промокоду CAPYBARA</span>
-        <span class="close-btn" onclick="document.getElementById('promo').style.display='none'">×</span>
-    </div>
-
-    <!-- МОДАЛЬНОЕ ОКНО С ФОРМОЙ -->
+    <!-- МОДАЛЬНОЕ ОКНО (Код без изменений) -->
     <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -76,28 +84,42 @@
                 <button class="modal-close" onclick="closeOrderModal()">×</button>
             </div>
             <div class="modal-body">
-                <!-- iframe будет создаваться динамически через JS -->
                 <iframe id="yandexFormIframe" src="" frameborder="0"></iframe>
             </div>
         </div>
     </div>
 
-    <!-- СКРИПТ УПРАВЛЕНИЯ МОДАЛЬНЫМ ОКНОМ -->
+    <!-- СКРИПТЫ -->
     <script>
+        // Логика фильтрации
+        function filterProducts(category) {
+            // Меняем активную кнопку
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Фильтруем карточки
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Логика модального окна (осталась прежней)
         function openOrderModal(productName, productId) {
             const modal = document.getElementById('orderModal');
             const title = document.getElementById('modalTitle');
             const iframe = document.getElementById('yandexFormIframe');
 
-            // 1. Меняем заголовок окна, чтобы клиент видел, что заказывает
             title.textContent = 'Вы заказываете: ' + productName;
 
-            // 2. Формируем ссылку для iframe с GET-параметрами
             const baseUrl = "https://forms.yandex.ru/u/6affc43928697bf2845447a7/?iframe=1";
             const nameParam = "&answer_short_text_9008994401604016=" + encodeURIComponent(productName);
             const idParam = "&answer_short_text_9008994404244940=" + encodeURIComponent(productId);
 
-            // 3. Устанавливаем ссылку и показываем окно
             iframe.src = baseUrl + nameParam + idParam;
             modal.classList.add('active');
         }
@@ -105,17 +127,12 @@
         function closeOrderModal() {
             const modal = document.getElementById('orderModal');
             const iframe = document.getElementById('yandexFormIframe');
-            
-            // Очищаем iframe, чтобы при следующем открытии форма загрузилась заново
             iframe.src = ""; 
             modal.classList.remove('active');
         }
 
-        // Закрытие по клику на темный фон
         document.getElementById('orderModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeOrderModal();
-            }
+            if (e.target === this) closeOrderModal();
         });
     </script>
 
