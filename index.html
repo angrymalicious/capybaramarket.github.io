@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Убедитесь, что файл style.css лежит в той же папке, что и index.html -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -41,7 +42,7 @@
                     <img src="product-1/00.jpg" alt="Барашек Барбарисовый леденец">
                 </div>
                 <h3 class="product-title">Свеча "Барашек" Барбарисовый леденец</h3>
-                <p class="product-price">1 200 ₽</p>
+                <p class="product-price">400 ₽</p>
             </div>
 
             <!-- Товар 2 -->
@@ -97,7 +98,6 @@
     </div>
 
     <script>
-        // Фильтрация (немного поправил передачу event)
         function filterProducts(category, event) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -112,7 +112,6 @@
             });
         }
 
-        // Модальное окно
         function openOrderModal(productName, productId) {
             const modal = document.getElementById('orderModal');
             const title = document.getElementById('modalTitle');
