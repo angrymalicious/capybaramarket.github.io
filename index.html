@@ -4,415 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capybara Market | Свечи ручной работы</title>
-    <!-- Подключаем шрифты по дизайн-системе -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500&family=Oswald:wght@500&family=Space+Mono&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- ЦВЕТА И ПЕРЕМЕННЫЕ (из design.md) --- */
-        :root {
-            --workshop-blue: #0076ff;
-            --hail-yellow: #f4eb59;
-            --pale-sky: #c3d7ee;
-            --canvas: #ffffff;
-            --bone: #eeede8;
-            --ink: #000000;
-            --press-black: #1e1e1e;
-            --smudge: #888888;
-            
-            --font-display: 'Oswald', sans-serif;
-            --font-body: 'IBM Plex Serif', serif;
-            --font-mono: 'Space Mono', monospace;
-        }
-
-        /* --- БАЗОВЫЕ СТИЛИ --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--canvas);
-            color: var(--press-black);
-            font-family: var(--font-body);
-            font-size: 14px;
-            line-height: 1.3; /* Чуть свободнее, чем 1.14 для читаемости на экране */
-            letter-spacing: -0.02em;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            color: var(--ink);
-            text-decoration: none;
-        }
-
-        /* --- СЕТКА И РАМКИ --- */
-        .border-bottom { border-bottom: 1px solid var(--ink); }
-        .border-top { border-top: 1px solid var(--ink); }
-        .border-right { border-right: 1px solid var(--ink); }
-        .border-left { border-left: 1px solid var(--ink); }
-
-        /* --- НАВИГАЦИЯ --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 24px;
-            background-color: var(--canvas);
-            font-family: var(--font-mono);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 20px;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            border: 1px solid var(--ink);
-            padding: 4px 12px;
-            text-transform: uppercase;
-        }
-
-        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
-        .hero {
-            display: flex;
-            border-bottom: 1px solid var(--ink);
-            min-height: 60vh;
-        }
-
-        .hero-text {
-            width: 35%;
-            padding: 40px;
-            border-right: 1px solid var(--ink);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background-color: var(--bone);
-        }
-
-        .hero-text h1 {
-            font-family: var(--font-display);
-            font-size: 54px;
-            font-weight: 500;
-            line-height: 0.9;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-text p {
-            font-size: 16px;
-            color: var(--press-black);
-            max-width: 80%;
-        }
-
-        .hero-image {
-            width: 65%;
-            background-image: url('https://images.unsplash.com/photo-1602874801006-3a1ce9e7d2b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            background-color: var(--pale-sky); /* Заглушка, если фото не загрузится */
-        }
-
-        /* --- КАТАЛОГ --- */
-        .catalog-header {
-            padding: 40px 24px 20px;
-        }
-
-        .catalog-header h2 {
-            font-family: var(--font-display);
-            font-size: 32px;
-            text-transform: uppercase;
-            line-height: 1;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            border-top: 1px solid var(--ink);
-            border-left: 1px solid var(--ink);
-            margin: 0 24px 40px;
-        }
-
-        .card {
-            padding: 20px;
-            border-right: 1px solid var(--ink);
-            border-bottom: 1px solid var(--ink);
-            background-color: var(--bone);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border: 1px solid var(--ink);
-            margin-bottom: 16px;
-            background-color: var(--canvas);
-        }
-
-        .card-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .card-title {
-            font-family: var(--font-display);
-            font-size: 20px;
-            line-height: 1;
-            text-transform: uppercase;
-            max-width: 70%;
-        }
-
-        .price-tag {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            border: 1px solid var(--ink);
-            border-radius: 5px;
-            padding: 2px 6px;
-            white-space: nowrap;
-        }
-
-        .card-desc {
-            font-size: 13px;
-            color: var(--press-black);
-            margin-bottom: 16px;
-            flex-grow: 1;
-        }
-
-        /* Кнопка покупки */
-        .btn-shop {
-            display: block;
-            width: 100%;
-            background-color: var(--workshop-blue);
-            color: var(--canvas);
-            font-family: var(--font-mono);
-            font-size: 12px;
-            text-transform: uppercase;
-            text-align: center;
-            padding: 12px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            letter-spacing: 0.1em;
-            transition: opacity 0.2s;
-        }
-
-        .btn-shop:hover {
-            opacity: 0.8;
-        }
-
-        /* --- ИНФО ПАНЕЛЬ (ДОСТАВКА И ОПЛАТА) --- */
-        .info-panel {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-top: 1px solid var(--ink);
-            border-bottom: 1px solid var(--ink);
-        }
-
-        .info-block {
-            padding: 40px;
-        }
-
-        .info-block:first-child {
-            border-right: 1px solid var(--ink);
-            background-color: var(--pale-sky);
-        }
-
-        .info-block:last-child {
-            background-color: var(--canvas);
-        }
-
-        .info-block h3 {
-            font-family: var(--font-display);
-            font-size: 24px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .info-block ul {
-            list-style: none;
-        }
-
-        .info-block li {
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .info-block strong {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* --- ФУТЕР И ПРОМО БАННЕР --- */
-        footer {
-            padding: 40px 24px;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 12px;
-        }
-
-        .social-links {
-            margin-top: 16px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-links a {
-            border-bottom: 1px solid var(--ink);
-        }
-
-        .promo-banner {
-            background-color: var(--hail-yellow);
-            color: var(--ink);
-            padding: 12px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            border-top: 1px solid var(--ink);
-        }
-
-        .close-btn {
-            cursor: pointer;
-            font-weight: bold;
-            font-family: sans-serif;
-        }
-
-        /* --- АДАПТИВНОСТЬ --- */
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; }
-            .hero-text { width: 100%; border-right: none; border-bottom: 1px solid var(--ink); padding: 24px; }
-            .hero-text h1 { font-size: 40px; }
-            .hero-image { width: 100%; min-height: 40vh; }
-            .info-panel { grid-template-columns: 1fr; }
-            .info-block:first-child { border-right: none; border-bottom: 1px solid var(--ink); }
-            .grid { margin: 0 12px 40px; }
-            nav { padding: 16px 12px; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- НАВИГАЦИЯ -->
     <nav class="border-bottom">
-        <div class="nav-links">
-            <a href="#">Каталог</a>
-            <a href="#about">О нас</a>
-        </div>
+        <div class="nav-links"><a href="#catalog">Каталог</a></div>
         <div class="logo">Capybara</div>
-        <div class="nav-links">
-            <!-- Замените # на ссылку на ваш профиль -->
-            <a href="https://vk.com/ваш_профиль">ВК</a>
-        </div>
+        <div class="nav-links"><a href="#order">Заказать</a></div>
     </nav>
 
-    <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero">
         <div class="hero-text">
             <h1>Ароматы в каждой детали</h1>
-            <p>Крафтовые свечи из натурального соевого воска. Ручная работа, уникальные ароматы и уют в вашем доме.</p>
+            <p>Крафтовые свечи из натурального соевого воска. Ручная работа и уникальные ароматы для вашего дома.</p>
         </div>
         <div class="hero-image"></div>
     </section>
 
-    <!-- КАТАЛОГ -->
-    <div class="catalog-header">
-        <h2>Каталог</h2>
-    </div>
-
+    <div class="catalog-header" id="catalog"><h2>Каталог</h2></div>
     <div class="grid">
-        
         <!-- Товар 1 -->
         <div class="card">
             <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Лаванда" class="card-img">
-            <div class="card-title-row">
-                <h3 class="card-title">Лавандовый вечер</h3>
-                <span class="price-tag">800 ₽</span>
-            </div>
-            <p class="card-desc">Нежный аромат лаванды и бергамота для спокойного отдыха. Время горения: 40 часов.</p>
-            <!-- Ссылка для заказа в Telegram (замените ник) -->
-            <a href="https://t.me/ваш_ник?text=Здравствуйте!%20Хочу%20заказать%20свечу%20'Лавандовый%20вечер'" class="btn-shop">Заказать</a>
+            <div class="card-title-row"><h3 class="card-title">Лавандовый вечер</h3><span class="price-tag">800 ₽</span></div>
+            <p class="card-desc">Нежный аромат лаванды и бергамота. Время горения: 40 часов.</p>
+            <a href="product-1.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
+            <a href="https://forms.yandex.ru/u/ВАШ_ID?prefill_product=Свеча%20Лавандовый%20вечер" class="btn-shop" target="_blank">Заказать</a>
         </div>
-
         <!-- Товар 2 -->
         <div class="card">
             <img src="https://images.unsplash.com/photo-1575844264831-4b8920b431a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Корица" class="card-img">
-            <div class="card-title-row">
-                <h3 class="card-title">Тепло корицы</h3>
-                <span class="price-tag">850 ₽</span>
-            </div>
+            <div class="card-title-row"><h3 class="card-title">Тепло корицы</h3><span class="price-tag">850 ₽</span></div>
             <p class="card-desc">Согревающий аромат корицы, яблока и ванили. Идеально для прохладных вечеров.</p>
-            <a href="https://t.me/ваш_ник?text=Здравствуйте!%20Хочу%20заказать%20свечу%20'Тепло%20корицы'" class="btn-shop">Заказать</a>
+            <a href="product-2.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
+            <a href="https://forms.yandex.ru/u/ВАШ_ID?prefill_product=Свеча%20Тепло%20корицы" class="btn-shop" target="_blank">Заказать</a>
         </div>
-
         <!-- Товар 3 -->
         <div class="card">
             <img src="https://images.unsplash.com/photo-1602874801006-3a1ce9e7d2b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Хвоя" class="card-img">
-            <div class="card-title-row">
-                <h3 class="card-title">Зимний лес</h3>
-                <span class="price-tag">900 ₽</span>
-            </div>
+            <div class="card-title-row"><h3 class="card-title">Зимний лес</h3><span class="price-tag">900 ₽</span></div>
             <p class="card-desc">Свежий аромат хвои, кедра и эвкалипта. Создает атмосферу загородного дома.</p>
-            <a href="https://t.me/ваш_ник?text=Здравствуйте!%20Хочу%20заказать%20свечу%20'Зимний%20лес'" class="btn-shop">Заказать</a>
+            <a href="product-3.html" class="btn-secondary" style="margin-bottom: 8px;">Подробнее</a>
+            <a href="https://forms.yandex.ru/u/ВАШ_ID?prefill_product=Свеча%20Зимний%20лес" class="btn-shop" target="_blank">Заказать</a>
         </div>
-
     </div>
 
-    <!-- ИНФО ПАНЕЛЬ (ДОСТАВКА И ОПЛАТА) -->
-    <section class="info-panel" id="about">
-        <div class="info-block">
-            <h3>Доставка</h3>
-            <ul>
-                <li><strong>Почта России</strong> — от 300 ₽ (оплата при получении или онлайн).</li>
-                <li><strong>Яндекс Доставка</strong> — от 400 ₽ (курьер до двери).</li>
-                <li>Стоимость доставки рассчитывается индивидуально и <strong>оплачивается покупателем</strong>.</li>
-            </ul>
-        </div>
-        <div class="info-block">
-            <h3>Оплата</h3>
-            <ul>
-                <li><strong>СБП (Система быстрых платежей)</strong> — по QR-коду или номеру телефона.</li>
-                <li>После оформления заказа я вышлю вам реквизиты и чек.</li>
-                <li>Отправка происходит в течение 2-3 дней после подтверждения оплаты.</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- ФУТЕР -->
     <footer>
         <p>© 2024 Capybara Market. Свечи ручной работы.</p>
         <div class="social-links">
-            <a href="https://t.me/lavkacapybara?direct">Telegram</a>
-            <a href="https://vk.com/lavkacapybara">ВКонтакте</a>
+            <a href="https://t.me/ваш_ник">Telegram</a>
+            <a href="https://vk.com/ваш_профиль">ВКонтакте</a>
             <a href="https://max.ru/ваш_профиль">MAX</a>
         </div>
     </footer>
 
-    <!-- ПРОМО БАННЕР (Hail Yellow) -->
     <div class="promo-banner" id="promo">
         <span>Скидка 10% на первый заказ по промокоду CAPYBARA</span>
         <span class="close-btn" onclick="document.getElementById('promo').style.display='none'">×</span>
